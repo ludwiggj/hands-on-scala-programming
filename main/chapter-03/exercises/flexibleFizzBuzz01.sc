@@ -1,4 +1,4 @@
-def flexibleFizzBuzz(callback: String => Unit) = {
+def flexibleFizzBuzz(callback: String => Unit): Unit = {
   (for (i <- Range.inclusive(1, 15)) yield {
     if (i % 3 == 0 && i % 5 == 0) "FizzBuzz"
     else if (i % 3 == 0) "Fizz"
@@ -7,12 +7,12 @@ def flexibleFizzBuzz(callback: String => Unit) = {
   }).foreach(callback)
 }
 
-flexibleFizzBuzz(s => {}) // do nothing
+flexibleFizzBuzz(_ => {}) // do nothing
 flexibleFizzBuzz(s => println(s))
-  
+
 var i = 0
 val output = new Array[String](15)
-flexibleFizzBuzz{s =>
+flexibleFizzBuzz { s =>
   output(i) = s
   i += 1
 }

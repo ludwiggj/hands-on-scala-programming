@@ -1,9 +1,11 @@
-package foo
+package foo.exercises.chapter_04
+
 import utest._
-object ExampleTests extends TestSuite{
+
+object Example04Tests extends TestSuite {
   def tests = Tests{
     test("hello"){
-      val result = Example.hello()
+      val result = Example04.hello()
       assert(result == "Hello World")
       result
     }

@@ -4,4 +4,6 @@ def helloMessage(names: Seq[String]) = names match
   case names =>
     names.mkString("Hello: ", ", ", "!")
 
-println(helloMessage(args.toSeq))
+def main(args: Array[String]): Unit = {
+  println(helloMessage(args.toSeq))
+}

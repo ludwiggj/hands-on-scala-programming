@@ -1,4 +1,4 @@
-def flexibleFizzBuzz(handleLine: String => Unit) = 
+def textbookFlexibleFizzBuzz(handleLine: String => Unit): Unit =
   for (i <- Range.inclusive(1, 15)) {
     handleLine(
       if (i % 3 == 0 && i % 5 == 0) "FizzBuzz"
@@ -8,12 +8,12 @@ def flexibleFizzBuzz(handleLine: String => Unit) =
     )
   }
 
-flexibleFizzBuzz(s => {}) // do nothing
-flexibleFizzBuzz(s => println(s))
-  
+textbookFlexibleFizzBuzz(_ => {}) // do nothing
+textbookFlexibleFizzBuzz(s => println(s))
+
 var i = 0
 val output = new Array[String](15)
-flexibleFizzBuzz{s =>
+textbookFlexibleFizzBuzz{ s =>
   output(i) = s
   i += 1
 }
