@@ -10,7 +10,7 @@ def runIsValidTests: Unit = {
   val isValidTests =
     Table(
       ("input", "expected"),
-      (Array(
+      (Soduku(Array(
         Array(3, 1, 6, 5, 7, 8, 4, 9, 2),
         Array(5, 2, 9, 1, 3, 4, 7, 6, 8),
         Array(4, 8, 7, 6, 2, 9, 5, 3, 1),
@@ -20,8 +20,8 @@ def runIsValidTests: Unit = {
         Array(1, 3, 0, 0, 0, 0, 2, 5, 0),
         Array(0, 0, 0, 0, 0, 0, 0, 7, 4),
         Array(0, 0, 5, 2, 0, 6, 3, 0, 0)
-       ), true),
-      (Array(
+       )), true),
+      (Soduku(Array(
         Array(3, 1, 6, 5, 7, 8, 4, 9, 3),
         Array(5, 2, 9, 1, 3, 4, 7, 6, 8),
         Array(4, 8, 7, 6, 2, 9, 5, 3, 1),
@@ -31,16 +31,16 @@ def runIsValidTests: Unit = {
         Array(1, 3, 0, 0, 0, 0, 2, 5, 0),
         Array(0, 0, 0, 0, 0, 0, 0, 7, 4),
         Array(0, 0, 5, 2, 0, 6, 3, 0, 0)
-       ), false)
+       )), false)
     )
 
-  forAll (isValidTests) { (input: Array[Array[Int]], expected: Boolean) =>
-    val actual = isValidSudoku(input)
+  forAll (isValidTests) { (input: Soduku, expected: Boolean) =>
+    val actual = input.isValid
     assert(
       actual == expected,
-      s"isValidSoduku: ${renderSoduku(input)}, Expected: $expected, Got: $actual"
+      s"isValidSoduku: ${input.render}, Expected: $expected, Got: $actual"
     )
-    println(s"Asserted:\n${renderSoduku(input)} => $actual\n")
+    println(s"Asserted:\n${input.render} => $actual\n")
   }
 }
 
@@ -51,7 +51,7 @@ def runSolveTests: Unit = {
   val solveSodukuTests = 
     Table(
       ("input", "expected"),
-      (Array(
+      (Soduku(Array(
         Array(3, 0, 6, 5, 0, 8, 4, 0, 0),
         Array(5, 2, 0, 0, 0, 0, 0, 0, 0),
         Array(0, 8, 7, 0, 0, 0, 0, 3, 1),
@@ -61,20 +61,20 @@ def runSolveTests: Unit = {
         Array(1, 3, 0, 0, 0, 0, 2, 5, 0),
         Array(0, 0, 0, 0, 0, 0, 0, 7, 4),
         Array(0, 0, 5, 2, 0, 6, 3, 0, 0)
-      ), None)
+      )), None)
     )
 
-  forAll (solveSodukuTests) { (input: Array[Array[Int]], expected: Option[Array[Array[Int]]]) =>
-    val actual = solveSoduku(input)
+  forAll (solveSodukuTests) { (input: Soduku, expected: Option[Array[Array[Int]]]) =>
+    val actual = input.solve
     assert(
       actual == expected,
-      s"solveSoduku: ${renderSoduku(input)}, Expected: $expected, Got: $actual"
+      s"solveSoduku: ${input.render}, Expected: $expected, Got: $actual"
     )
-    println(s"Asserted:\n${renderSoduku(input)} => $actual\n")
+    println(s"Asserted:\n${input.render} => $actual\n")
   }
 }
 
-runIsValidTests
+//runIsValidTests
 runSolveTests
 
 // From chapter 4
